@@ -27,6 +27,12 @@ jobs:
       - name: Build the solution
         run: dotnet build XSB3.0.sln -c Release
         
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Plugin
+          path: /home/runner/work/XSB3.0/XSB3.0/bin/Release/net6.0/*
+        
       - name: Release
         uses: softprops/action-gh-release@v1
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
@@ -36,8 +42,4 @@ jobs:
           name: Pre-Release
           files: /home/runner/work/XSB3.0/XSB3.0/bin/Release/net6.0/*
       
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: Plugin
-          path: /home/runner/work/XSB3.0/XSB3.0/bin/Release/net6.0/*
+
