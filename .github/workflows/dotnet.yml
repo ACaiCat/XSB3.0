@@ -38,8 +38,8 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         with:
           prerelease: true
-          tag_name: Test
-          name: Pre-Release
+          tag_name: Pre-Release
+          name: Release
           files: /home/runner/work/XSB3.0/XSB3.0/bin/Release/net6.0/*
       
 
