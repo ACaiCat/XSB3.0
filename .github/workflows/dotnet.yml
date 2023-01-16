@@ -34,10 +34,10 @@ jobs:
           prerelease: true
           tag_name: Test
           name: Pre-Release
-          files: /home/runner/work/SB3.0/bin/Release/net6.0/*
+          files: /home/runner/work/XSB3.0/XSB3.0/bin/Release/net6.0/*
       
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: Plugin
-          path: /home/runner/work/SB3.0/bin/Release/net6.0/*
+          path: /home/runner/work/XSB3.0/XSB3.0/bin/Release/net6.0/*
