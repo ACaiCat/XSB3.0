@@ -33,6 +33,12 @@ jobs:
           name: XSB
           path: /home/runner/work/XSB3.0/XSB3.0/bin/Release/net6.0/*
         
+      - name: Prepare Artifact
+        id: pa
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: 
+          Compress-Archive -Path /home/runner/work/XSB3.0/XSB3.0/bin/Release/net6.0/* XSB.zip
+      
       - name: Release
         uses: softprops/action-gh-release@v1
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
@@ -40,6 +46,6 @@ jobs:
           prerelease: true
           tag_name: Pre-Release
           name: Release
-          files: /home/runner/work/XSB3.0/XSB3.0/bin/Release/net6.0/*
+          files: XSB.zip
       
 
