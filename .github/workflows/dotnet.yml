@@ -37,7 +37,7 @@ jobs:
         id: pa
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: 
-          Compress-Archive -Path /home/runner/work/XSB3.0/XSB3.0/bin/Release/net6.0/* XSB.zip
+          zip -r XSB.zip /home/runner/work/XSB3.0/XSB3.0/bin/Release/net6.0/* 
       
       - name: Release
         uses: softprops/action-gh-release@v1
