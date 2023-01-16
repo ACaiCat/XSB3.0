@@ -25,7 +25,7 @@ jobs:
           dotnet-version: '6.0.100'
 
       - name: Build the solution
-        run: dotnet XSB3.0.sln -c Release
+        run: dotnet build XSB3.0.sln -c Release
         
       - name: Release
         uses: softprops/action-gh-release@v1
