@@ -26,6 +26,7 @@ jobs:
 
       - name: Build the solution
         run: dotnet build XSB3.0.sln -c Release
+             tree -d dir /home/runner/work/XSB3.0
         
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
