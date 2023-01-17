@@ -11,7 +11,7 @@ namespace XSB
         public string SqlType { get; set; } = "Sqlite";
 
         [JsonProperty("SqLite路径")]
-        public string SqlitePath { get; set; } = "XSB.sqlite";
+        public string SqlitePath { get; set; } = "XSB/XSB.sqlite";
 
         [JsonProperty("MySQL地址")]
         public string Host { get; set; } = "localhost";
@@ -37,7 +37,7 @@ namespace XSB
 
     public class Config
     {
-        public const string ConfigPath = "XSBConfig.json";
+        public const string ConfigPath = "XSB/XSBConfig.json";
 
         [JsonProperty("数据库设置")]
         public SqlConfig sqlConfig { get; set; } = new();
@@ -54,6 +54,7 @@ namespace XSB
         {
             if (!File.Exists(path))
             {
+                Directory.CreateDirectory(Path.GetDirectoryName(path)!);
                 Config config = new Config();
                 config.Write(path);
                 return config;

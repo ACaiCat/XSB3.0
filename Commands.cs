@@ -151,16 +151,7 @@ namespace XSB
 
         public static bool HandleCommand(GroupMessageEventArgs e, string text)
         {
-            ServerUser user = null!;
-            try
-            {
-                user = ServerUser.Load(e.SenderInfo.UserId);
-            }
-            catch
-            {
-                e.Reply("没有添加白名单!");
-                return true;
-            }
+            
             string cmdText = text.Remove(0, 1);
             string cmdPrefix = text[0].ToString();
             if (string.IsNullOrEmpty(Main.config.command.Specifier))
@@ -198,9 +189,22 @@ namespace XSB
 
             if (cmds.Count() == 0)
             {
-                e.Reply("无效命令");
+                //e.Reply("无匹配命令");
                 return true;
             }
+
+            ServerUser user = null!;
+            try
+            {
+                user = ServerUser.Load(e.SenderInfo.UserId);
+            }
+            catch
+            {
+                e.Reply("没有添加白名单!");
+                return true;
+            }
+
+
             foreach (Command cmd in cmds)
             {
                 if (!cmd.CanRun(user))

@@ -13,7 +13,7 @@ namespace XSB
         public static IDbConnection db;
         public static void Connect()
         {
-            switch (Main.config.sqlConfig.SqlType)
+            switch (Main.config.sqlConfig.SqlType.ToLower())
             {
                 case "mysql":
                     try
@@ -39,6 +39,8 @@ namespace XSB
                     Directory.CreateDirectory(Path.GetDirectoryName(sql)!);
                     db = new SqliteConnection(string.Format("Data Source={0}", sql));
                     break;
+                default:
+                    throw new Exception("配置文件错误: 无效数据库类型!");
             }
 
             SqlTableCreator sqlcreator = new SqlTableCreator(db, db.GetSqlType() == SqlType.Sqlite ? (IQueryBuilder)new SqliteQueryCreator() : new MysqlQueryCreator());

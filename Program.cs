@@ -10,6 +10,7 @@ using YukariToolBox.LightLog;
 using XSB;
 
 Main.config = Config.Read(Config.ConfigPath);
+DB.Connect();
 
 Thread readLine = new(new ThreadStart(delegate
 {
@@ -63,7 +64,7 @@ service.Event.OnClientConnect += (_, eventArgs) =>
 };
 
 //群聊消息事件
-service.Event.OnGroupMessage += async (_, eventArgs) => { ; };
+service.Event.OnGroupMessage += async (_, eventArgs) => { await Task.Run(delegate { Commands.HandleCommand(eventArgs, eventArgs.Message.RawText); }); };
 service.Event.OnSelfGroupMessage += (_, eventArgs) =>
 {
     Log.Warning("test", $"self group msg {eventArgs.Message.MessageId}[{eventArgs.IsSelfMessage}]");
