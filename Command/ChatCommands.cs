@@ -16,8 +16,7 @@ namespace XSB
 
             add(new Command(addWhiteList, "添加白名单")
             {
-                HelpText = "用于在首次设置TShock时验证身份成为超级管理员.",
-                Show = "验证超级管理员"
+                HelpText = "添加白名单",
             });
         }
 
