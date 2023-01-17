@@ -32,7 +32,7 @@ namespace XSB
     public class CommandConfig
     {
         [JsonProperty("命令标识符")]
-        public string SqlType { get; set; } = "";
+        public string Specifier { get; set; } = "";
     }
 
     public class Config

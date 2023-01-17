@@ -14,17 +14,17 @@ namespace XSB
     }
     public class ServerUser
     {
-        int QQ { get; set; }
-        string name { get; set; }
-        Permision permission { get; set; }
+        public long QQ { get; set; }
+        public string name { get; set; }
+        public Permision permission { get; set; }
 
-        int money { get; set; }
-        string signTime { get; set; }
+        public int money { get; set; }
+        public string signTime { get; set; }
 
-        int banCount { get; set; }
+        public int banCount { get; set; }
 
-        bool frozen { get; set; }
-        bool sign 
+        public bool frozen { get; set; }
+        public bool sign 
         { 
             get
             {
@@ -32,25 +32,25 @@ namespace XSB
             } 
         }
 
-        bool signContinuously
+        public bool signContinuously
         {
             get
             {
                 return ((DateTime.Now-TimeSpan.FromDays(1.0)).ToString("yyyy-MM-dd") == signTime);
             }
         }
-        
-        int signCount { get; set; }
-        int signSort { get; set; }
-        int signGetMonet { get; set; }
 
-        public ServerUser(int QQ)
+        public int signCount { get; set; }
+        public int signSort { get; set; }
+        public int signGetMonet { get; set; }
+
+        public ServerUser(long QQ)
         {
             using (QueryResult result = DB.db.QueryReader("SELECT * FROM 'users' WHERE QQ=@0;", QQ))
             {
                 if (result.Read())
                 {
-                    QQ=result.Get<int>("QQ");
+                    QQ=result.Get<long>("QQ");
                     name=result.Get<string>("name");
                     permission = (Permision)result.Get<int>("permission");
                     money = result.Get<int>("money");
@@ -78,7 +78,7 @@ namespace XSB
                 }
             }
         }
-        static ServerUser Load(int QQ)
+        public static ServerUser Load(long QQ)
         {
             return new(QQ);
         }
