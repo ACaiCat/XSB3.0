@@ -146,7 +146,7 @@ namespace XSB
             get { return Main.config.command.Specifier; }
         }
 
-        private delegate void AddChatCommand(string permission, CommandDelegate command, params string[] names);
+        public delegate void AddChatCommand(string permission, CommandDelegate command, params string[] names);
 
 
         public static bool HandleCommand(GroupMessageEventArgs e, string text)
@@ -157,6 +157,7 @@ namespace XSB
             if (string.IsNullOrEmpty(Main.config.command.Specifier))
             {
                 cmdPrefix = "";
+                cmdText = text;
             }
             int index = -1;
             for (int i = 0; i < cmdText.Length; i++)
@@ -183,26 +184,38 @@ namespace XSB
                 args = new List<string>();
             else
                 args = ParseParameters(cmdText.Substring(index));
-
             IEnumerable<Command> cmds = ChatCommands.FindAll(c => c.HasAlias(cmdName));
 
-
+            Console.WriteLine(cmdName);
             if (cmds.Count() == 0)
             {
                 //e.Reply("无匹配命令");
                 return true;
             }
+            ServerUser user;
 
-            ServerUser user = null!;
-            try
+
+
+            if (cmdName == "添加白名单")
             {
-                user = ServerUser.Load(e.SenderInfo.UserId);
+                user = new ServerUser
+                {
+                    permission = Permision.Normal
+                };
             }
-            catch
+            else
             {
-                e.Reply("没有添加白名单!");
-                return true;
+                try
+                {
+                    user = ServerUser.Load(e.SenderInfo.UserId);
+                }
+                catch
+                {
+                    e.Reply("没有添加白名单!");
+                    return true;
+                }
             }
+
 
 
             foreach (Command cmd in cmds)

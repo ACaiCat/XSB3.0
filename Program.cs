@@ -11,6 +11,7 @@ using XSB;
 
 Main.config = Config.Read(Config.ConfigPath);
 DB.Connect();
+RealCommands.InitCommands();
 
 Thread readLine = new(new ThreadStart(delegate
 {

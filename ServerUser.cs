@@ -44,6 +44,10 @@ namespace XSB
         public int signSort { get; set; }
         public int signGetMonet { get; set; }
 
+        public ServerUser()
+        {
+        }
+
         public ServerUser(long QQ)
         {
             using (QueryResult result = DB.db.QueryReader("SELECT * FROM 'users' WHERE QQ=@0;", QQ))
